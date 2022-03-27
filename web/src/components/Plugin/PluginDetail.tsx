@@ -309,7 +309,10 @@ const PluginDetail: React.FC<Props> = ({
   };
 
   const isNoConfigurationRequired =
-    pluginType === 'auth' && schemaType !== 'consumer' && monacoMode !== monacoModeList.UIForm && targetPluginName !== 'key-auth';
+    pluginType === 'auth' &&
+    schemaType !== 'consumer' &&
+    monacoMode !== monacoModeList.UIForm &&
+    targetPluginName !== 'key-auth';
 
   return (
     <Drawer
@@ -400,7 +403,7 @@ const PluginDetail: React.FC<Props> = ({
           name="disable"
         >
           <Switch
-            defaultChecked={isEnabled ? true : initialData[name] && !initialData[name].disable}
+            defaultChecked={!isEnabled ? true : initialData[name] && !initialData[name].disable}
             disabled={readonly || isEnabled}
           />
         </Form.Item>
