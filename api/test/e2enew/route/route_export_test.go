@@ -56,6 +56,7 @@ var _ = ginkgo.Describe("Route", func() {
 					"security": [],
 					"x-apisix-enable_websocket": false,
 					"x-apisix-hosts": ["foo.com", "*.bar.com"],
+					"x-apisix-id":"r1",
 					"x-apisix-labels": {
 						"build": "16",
 						"env": "production",
@@ -65,6 +66,7 @@ var _ = ginkgo.Describe("Route", func() {
 						"limit-count": {
 							"count": 2,
 							"key": "remote_addr",
+							"policy": "local",
 							"rejected_code": 503,
 							"time_window": 60
 						}
@@ -89,6 +91,7 @@ var _ = ginkgo.Describe("Route", func() {
 					"security": [],
 					"x-apisix-enable_websocket": false,
 					"x-apisix-hosts": ["foo.com", "*.bar.com"],
+					"x-apisix-id":"r1",
 					"x-apisix-labels": {
 						"build": "16",
 						"env": "production",
@@ -98,6 +101,7 @@ var _ = ginkgo.Describe("Route", func() {
 						"limit-count": {
 							"count": 2,
 							"key": "remote_addr",
+							"policy": "local",
 							"rejected_code": 503,
 							"time_window": 60
 						}
@@ -140,7 +144,8 @@ var _ = ginkgo.Describe("Route", func() {
 							"count": 2,
 							"time_window": 60,
 							"rejected_code": 503,
-							"key": "remote_addr"
+							"key": "remote_addr",
+							"policy": "local"
 						}
 					},
 					"status": 1,
@@ -183,6 +188,7 @@ var _ = ginkgo.Describe("Route", func() {
 					"security": [],
 					"x-apisix-enable_websocket": false,
 					"x-apisix-host": "*.bar.com",
+					"x-apisix-id":"r2",
 					"x-apisix-labels": {
 						"build": "16",
 						"env": "production",
@@ -192,6 +198,7 @@ var _ = ginkgo.Describe("Route", func() {
 						"limit-count": {
 							"count": 2,
 							"key": "remote_addr",
+							"policy": "local",
 							"rejected_code": 503,
 							"time_window": 60
 						}
@@ -216,6 +223,7 @@ var _ = ginkgo.Describe("Route", func() {
 					"security": [],
 					"x-apisix-enable_websocket": false,
 					"x-apisix-host": "*.bar.com",
+					"x-apisix-id":"r2",
 					"x-apisix-labels": {
 						"build": "16",
 						"env": "production",
@@ -225,6 +233,7 @@ var _ = ginkgo.Describe("Route", func() {
 						"limit-count": {
 							"count": 2,
 							"key": "remote_addr",
+							"policy": "local",
 							"rejected_code": 503,
 							"time_window": 60
 						}
@@ -268,7 +277,8 @@ var _ = ginkgo.Describe("Route", func() {
 							"count": 2,
 							"time_window": 60,
 							"rejected_code": 503,
-							"key": "remote_addr"
+							"key": "remote_addr",
+							"policy": "local"
 						}
 					},
 					"status": 1,
@@ -372,6 +382,7 @@ var _ = ginkgo.Describe("Route", func() {
 				"limit-count": {
 					"count": 100,
 					"key": "remote_addr",
+					"policy": "local",
 					"rejected_code": 503,
 					"time_window": 60
 				}
@@ -403,6 +414,7 @@ var _ = ginkgo.Describe("Route", func() {
 							}
 						},
 						"x-apisix-enable_websocket": false,
+						"x-apisix-id":"r3",
 						"x-apisix-labels": {
 							"build": "16",
 							"env": "production",
@@ -412,6 +424,7 @@ var _ = ginkgo.Describe("Route", func() {
 							"limit-count": {
 								"count": 100,
 								"key": "remote_addr",
+								"policy": "local",
 								"rejected_code": 503,
 								"time_window": 60
 							}
@@ -450,6 +463,7 @@ var _ = ginkgo.Describe("Route", func() {
 						 "limit-count": {
 							 "count": 100,
 							 "time_window": 60,
+							 "policy": "local",
 							 "rejected_code": 503,
 							 "key": "remote_addr"
 						 }
@@ -552,6 +566,7 @@ var _ = ginkgo.Describe("Route", func() {
 				"limit-count": {
 					"count": 100,
 					"key": "remote_addr",
+					"policy": "local",
 					"rejected_code": 503,
 					"time_window": 60
 				}
@@ -583,6 +598,7 @@ var _ = ginkgo.Describe("Route", func() {
 						},
 						"security": [],
 						"x-apisix-enable_websocket": false,
+						"x-apisix-id":"r4",
 						"x-apisix-labels": {
 							"build": "16",
 							"env": "production",
@@ -592,6 +608,7 @@ var _ = ginkgo.Describe("Route", func() {
 							"limit-count": {
 								"count": 100,
 								"key": "remote_addr",
+								"policy": "local",
 								"rejected_code": 503,
 								"time_window": 60
 							},
@@ -634,7 +651,8 @@ var _ = ginkgo.Describe("Route", func() {
 							"count": 100,
 							"time_window": 60,
 							"rejected_code": 503,
-							"key": "remote_addr"
+							"key": "remote_addr",
+							"policy": "local"
 						}
 					},
 					"upstream": {
@@ -740,6 +758,7 @@ var _ = ginkgo.Describe("Route", func() {
 				"limit-count": {
 					"count": 100,
 					"key": "remote_addr",
+					"policy": "local",
 					"rejected_code": 503,
 					"time_window": 60
 				}
@@ -771,6 +790,7 @@ var _ = ginkgo.Describe("Route", func() {
 						},
 						"security": [],
 						"x-apisix-enable_websocket": false,
+						"x-apisix-id":"r5",
 						"x-apisix-labels": {
 							"build": "16",
 							"env": "production",
@@ -780,6 +800,7 @@ var _ = ginkgo.Describe("Route", func() {
 							"limit-count": {
 								"count": 100,
 								"key": "remote_addr",
+								"policy": "local",
 								"rejected_code": 503,
 								"time_window": 60
 							},
@@ -840,7 +861,8 @@ var _ = ginkgo.Describe("Route", func() {
 							"count": 100,
 							"time_window": 60,
 							"rejected_code": 503,
-							"key": "remote_addr"
+							"key": "remote_addr",
+							"policy": "local"
 						}
 					},
 					"upstream_id": "1"
@@ -955,6 +977,7 @@ var _ = ginkgo.Describe("Route", func() {
 						},
 						"security": [],
 						"x-apisix-enable_websocket": false,
+						"x-apisix-id":"r8",
 						"x-apisix-plugins": {
 							"prometheus": {
 								"disable": false
@@ -1077,6 +1100,7 @@ var _ = ginkgo.Describe("Route", func() {
 						"security": [],
 						"summary": "所有",
 						"x-apisix-enable_websocket": false,
+						"x-apisix-id":"r9",
 						"x-apisix-labels": {
 							"API_VERSION": "v1",
 							"test": "1"
@@ -1276,6 +1300,7 @@ var _ = ginkgo.Describe("Route", func() {
 						"security": [],
 						"summary": "所有",
 						"x-apisix-enable_websocket": false,
+						"x-apisix-id":"r10",
 						"x-apisix-labels": {
 							"API_VERSION": "v1",
 							"test": "1"
@@ -1901,6 +1926,7 @@ var _ = ginkgo.Describe("Route", func() {
 						},
 						"summary": "所有",
 						"x-apisix-enable_websocket": false,
+						"x-apisix-id":"r1",
 						"x-apisix-labels": {
 							"build": "16",
 							"env": "production",
@@ -2043,6 +2069,7 @@ var _ = ginkgo.Describe("Route", func() {
 						},
 						"summary": "所有",
 						"x-apisix-enable_websocket": false,
+						"x-apisix-id":"r2",
 						"x-apisix-labels": {
 							"build": "16",
 							"env": "production",
@@ -2197,6 +2224,7 @@ var _ = ginkgo.Describe("Route", func() {
 						"summary": "所有",
 						"x-apisix-enable_websocket": false,
 						"x-apisix-hosts": ["test.com"],
+						"x-apisix-id":"r1",
 						"x-apisix-priority": 0,
 						"x-apisix-status": 1
 					}
@@ -2300,6 +2328,7 @@ var _ = ginkgo.Describe("Route", func() {
 						"summary": "所有",
 						"x-apisix-enable_websocket": false,
 						"x-apisix-hosts": ["test.com"],
+						"x-apisix-id":"r1",
 						"x-apisix-priority": 0,
 						"x-apisix-status": 1,
 						"x-apisix-upstream": {
@@ -2322,6 +2351,7 @@ var _ = ginkgo.Describe("Route", func() {
 						"summary": "所有1",
 						"x-apisix-enable_websocket": false,
 						"x-apisix-hosts": ["test.com"],
+						"x-apisix-id":"r2",
 						"x-apisix-priority": 0,
 						"x-apisix-status": 1,
 						"x-apisix-upstream": {
@@ -2344,6 +2374,7 @@ var _ = ginkgo.Describe("Route", func() {
 						"summary": "所有2",
 						"x-apisix-enable_websocket": false,
 						"x-apisix-hosts": ["test.com"],
+						"x-apisix-id":"r3",
 						"x-apisix-priority": 0,
 						"x-apisix-status": 1,
 						"x-apisix-upstream": {

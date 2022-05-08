@@ -36,17 +36,18 @@ import {
   Tooltip,
 } from 'antd';
 import { history, useIntl } from 'umi';
+import usePagination from '@/hooks/usePagination';
 import { PlusOutlined, ExportOutlined, ImportOutlined, DownOutlined } from '@ant-design/icons';
 import { js_beautify } from 'js-beautify';
 import yaml from 'js-yaml';
 import moment from 'moment';
 import { saveAs } from 'file-saver';
-import querystring from 'query-string';
 import { omit } from 'lodash';
 
 import { DELETE_FIELDS } from '@/constants';
 import { timestampToLocaleString } from '@/helpers';
 import type { RcFile } from 'antd/lib/upload';
+
 import {
   update,
   create,
@@ -86,21 +87,12 @@ const Page: React.FC = () => {
   const [rawData, setRawData] = useState<Record<string, any>>({});
   const [id, setId] = useState('');
   const [editorMode, setEditorMode] = useState<'create' | 'update'>('create');
-  const [paginationConfig, setPaginationConfig] = useState({ pageSize: 10, current: 1 });
+  const { paginationConfig, savePageList, checkPageList } = usePagination();
   const [debugDrawVisible, setDebugDrawVisible] = useState(false);
-
-  const savePageList = (page = 1, pageSize = 10) => {
-    history.replace(`/routes/list?page=${page}&pageSize=${pageSize}`);
-  };
 
   useEffect(() => {
     fetchLabelList().then(setLabelList);
   }, []);
-
-  useEffect(() => {
-    const { page = 1, pageSize = 10 } = querystring.parse(window.location.search);
-    setPaginationConfig({ pageSize: Number(pageSize), current: Number(page) });
-  }, [window.location.search]);
 
   const rowSelection: any = {
     selectedRowKeys,
@@ -115,7 +107,7 @@ const Page: React.FC = () => {
       message: msgTip,
     });
 
-    ref.current?.reload();
+    checkPageList(ref);
   };
 
   const handlePublishOffline = (rid: string, status: RouteModule.RouteStatus) => {
@@ -236,47 +228,47 @@ const Page: React.FC = () => {
       onClick: () => void;
       icon?: ReactNode;
     }[] = [
-      {
-        name: formatMessage({ id: 'component.global.view' }),
-        onClick: () => {
-          setId(record.id);
-          setRawData(omit(record, DELETE_FIELDS));
-          setVisible(true);
-          setEditorMode('update');
+        {
+          name: formatMessage({ id: 'component.global.view' }),
+          onClick: () => {
+            setId(record.id);
+            setRawData(omit(record, DELETE_FIELDS));
+            setVisible(true);
+            setEditorMode('update');
+          },
         },
-      },
-      {
-        name: formatMessage({ id: 'component.global.duplicate' }),
-        onClick: () => {
-          history.push(`/routes/${record.id}/duplicate`);
+        {
+          name: formatMessage({ id: 'component.global.duplicate' }),
+          onClick: () => {
+            history.push(`/routes/${record.id}/duplicate`);
+          },
         },
-      },
-      {
-        name: formatMessage({ id: 'component.global.delete' }),
-        onClick: () => {
-          Modal.confirm({
-            type: 'warning',
-            title: formatMessage({ id: 'component.global.popconfirm.title.delete' }),
-            content: (
-              <>
-                {formatMessage({ id: 'component.global.name' })} - {record.name}
-                <br />
-                ID - {record.id}
-              </>
-            ),
-            onOk: () => {
-              return remove(record.id!).then(() => {
-                handleTableActionSuccessResponse(
-                  `${formatMessage({ id: 'component.global.delete' })} ${formatMessage({
-                    id: 'menu.routes',
-                  })} ${formatMessage({ id: 'component.status.success' })}`,
-                );
-              });
-            },
-          });
+        {
+          name: formatMessage({ id: 'component.global.delete' }),
+          onClick: () => {
+            Modal.confirm({
+              type: 'warning',
+              title: formatMessage({ id: 'component.global.popconfirm.title.delete' }),
+              content: (
+                <>
+                  {formatMessage({ id: 'component.global.name' })} - {record.name}
+                  <br />
+                  ID - {record.id}
+                </>
+              ),
+              onOk: () => {
+                return remove(record.id!).then(() => {
+                  handleTableActionSuccessResponse(
+                    `${formatMessage({ id: 'component.global.delete' })} ${formatMessage({
+                      id: 'menu.routes',
+                    })} ${formatMessage({ id: 'component.status.success' })}`,
+                  );
+                });
+              },
+            });
+          },
         },
-      },
-    ];
+      ];
 
     return (
       <Dropdown
@@ -559,6 +551,10 @@ const Page: React.FC = () => {
           </Space>
         </>
       ),
+    },
+    {
+      title: formatMessage({ id: 'menu.plugin' }),
+      dataIndex: 'plugins',
     },
   ];
 

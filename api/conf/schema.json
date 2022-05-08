@@ -11,7 +11,6 @@
 				},
 				"labels": {
 					"description": "key/value pairs to specify attributes",
-					"maxProperties": 16,
 					"patternProperties": {
 						".*": {
 							"description": "value of label",
@@ -97,7 +96,6 @@
 				},
 				"labels": {
 					"description": "key/value pairs to specify attributes",
-					"maxProperties": 16,
 					"patternProperties": {
 						".*": {
 							"description": "value of label",
@@ -378,7 +376,6 @@
 				},
 				"labels": {
 					"description": "key/value pairs to specify attributes",
-					"maxProperties": 16,
 					"patternProperties": {
 						".*": {
 							"description": "value of label",
@@ -723,6 +720,43 @@
 									"type": "object"
 								},
 								"passive": {
+									"default": {
+										"healthy": {
+											"http_statuses": [
+												200,
+												201,
+												202,
+												203,
+												204,
+												205,
+												206,
+												207,
+												208,
+												226,
+												300,
+												301,
+												302,
+												303,
+												304,
+												305,
+												306,
+												307,
+												308
+											],
+											"successes": 0
+										},
+										"type": "http",
+										"unhealthy": {
+											"http_failures": 0,
+											"http_statuses": [
+												429,
+												500,
+												503
+											],
+											"tcp_failures": 0,
+											"timeouts": 0
+										}
+									},
 									"properties": {
 										"healthy": {
 											"properties": {
@@ -760,7 +794,7 @@
 												"successes": {
 													"default": 5,
 													"maximum": 254,
-													"minimum": 1,
+													"minimum": 0,
 													"type": "integer"
 												}
 											},
@@ -780,7 +814,7 @@
 												"http_failures": {
 													"default": 5,
 													"maximum": 254,
-													"minimum": 1,
+													"minimum": 0,
 													"type": "integer"
 												},
 												"http_statuses": {
@@ -801,13 +835,13 @@
 												"tcp_failures": {
 													"default": 2,
 													"maximum": 254,
-													"minimum": 1,
+													"minimum": 0,
 													"type": "integer"
 												},
 												"timeouts": {
 													"default": 7,
 													"maximum": 254,
-													"minimum": 1,
+													"minimum": 0,
 													"type": "integer"
 												}
 											},
@@ -894,7 +928,6 @@
 						},
 						"labels": {
 							"description": "key/value pairs to specify attributes",
-							"maxProperties": 16,
 							"patternProperties": {
 								".*": {
 									"description": "value of label",
@@ -981,11 +1014,15 @@
 						},
 						"scheme": {
 							"default": "http",
+							"description": "The scheme of the upstream. For L7 proxy, it can be one of grpc/grpcs/http/https. For L4 proxy, it can be one of tcp/tls/udp.",
 							"enum": [
 								"grpc",
 								"grpcs",
 								"http",
-								"https"
+								"https",
+								"tcp",
+								"tls",
+								"udp"
 							]
 						},
 						"service_name": {
@@ -1120,7 +1157,6 @@
 				},
 				"labels": {
 					"description": "key/value pairs to specify attributes",
-					"maxProperties": 16,
 					"patternProperties": {
 						".*": {
 							"description": "value of label",
@@ -1306,6 +1342,43 @@
 									"type": "object"
 								},
 								"passive": {
+									"default": {
+										"healthy": {
+											"http_statuses": [
+												200,
+												201,
+												202,
+												203,
+												204,
+												205,
+												206,
+												207,
+												208,
+												226,
+												300,
+												301,
+												302,
+												303,
+												304,
+												305,
+												306,
+												307,
+												308
+											],
+											"successes": 0
+										},
+										"type": "http",
+										"unhealthy": {
+											"http_failures": 0,
+											"http_statuses": [
+												429,
+												500,
+												503
+											],
+											"tcp_failures": 0,
+											"timeouts": 0
+										}
+									},
 									"properties": {
 										"healthy": {
 											"properties": {
@@ -1343,7 +1416,7 @@
 												"successes": {
 													"default": 5,
 													"maximum": 254,
-													"minimum": 1,
+													"minimum": 0,
 													"type": "integer"
 												}
 											},
@@ -1363,7 +1436,7 @@
 												"http_failures": {
 													"default": 5,
 													"maximum": 254,
-													"minimum": 1,
+													"minimum": 0,
 													"type": "integer"
 												},
 												"http_statuses": {
@@ -1384,13 +1457,13 @@
 												"tcp_failures": {
 													"default": 2,
 													"maximum": 254,
-													"minimum": 1,
+													"minimum": 0,
 													"type": "integer"
 												},
 												"timeouts": {
 													"default": 7,
 													"maximum": 254,
-													"minimum": 1,
+													"minimum": 0,
 													"type": "integer"
 												}
 											},
@@ -1477,7 +1550,6 @@
 						},
 						"labels": {
 							"description": "key/value pairs to specify attributes",
-							"maxProperties": 16,
 							"patternProperties": {
 								".*": {
 									"description": "value of label",
@@ -1564,11 +1636,15 @@
 						},
 						"scheme": {
 							"default": "http",
+							"description": "The scheme of the upstream. For L7 proxy, it can be one of grpc/grpcs/http/https. For L4 proxy, it can be one of tcp/tls/udp.",
 							"enum": [
 								"grpc",
 								"grpcs",
 								"http",
-								"https"
+								"https",
+								"tcp",
+								"tls",
+								"udp"
 							]
 						},
 						"service_name": {
@@ -1733,7 +1809,6 @@
 				},
 				"labels": {
 					"description": "key/value pairs to specify attributes",
-					"maxProperties": 16,
 					"patternProperties": {
 						".*": {
 							"description": "value of label",
@@ -2026,6 +2101,43 @@
 									"type": "object"
 								},
 								"passive": {
+									"default": {
+										"healthy": {
+											"http_statuses": [
+												200,
+												201,
+												202,
+												203,
+												204,
+												205,
+												206,
+												207,
+												208,
+												226,
+												300,
+												301,
+												302,
+												303,
+												304,
+												305,
+												306,
+												307,
+												308
+											],
+											"successes": 0
+										},
+										"type": "http",
+										"unhealthy": {
+											"http_failures": 0,
+											"http_statuses": [
+												429,
+												500,
+												503
+											],
+											"tcp_failures": 0,
+											"timeouts": 0
+										}
+									},
 									"properties": {
 										"healthy": {
 											"properties": {
@@ -2063,7 +2175,7 @@
 												"successes": {
 													"default": 5,
 													"maximum": 254,
-													"minimum": 1,
+													"minimum": 0,
 													"type": "integer"
 												}
 											},
@@ -2083,7 +2195,7 @@
 												"http_failures": {
 													"default": 5,
 													"maximum": 254,
-													"minimum": 1,
+													"minimum": 0,
 													"type": "integer"
 												},
 												"http_statuses": {
@@ -2104,13 +2216,13 @@
 												"tcp_failures": {
 													"default": 2,
 													"maximum": 254,
-													"minimum": 1,
+													"minimum": 0,
 													"type": "integer"
 												},
 												"timeouts": {
 													"default": 7,
 													"maximum": 254,
-													"minimum": 1,
+													"minimum": 0,
 													"type": "integer"
 												}
 											},
@@ -2197,7 +2309,6 @@
 						},
 						"labels": {
 							"description": "key/value pairs to specify attributes",
-							"maxProperties": 16,
 							"patternProperties": {
 								".*": {
 									"description": "value of label",
@@ -2284,11 +2395,15 @@
 						},
 						"scheme": {
 							"default": "http",
+							"description": "The scheme of the upstream. For L7 proxy, it can be one of grpc/grpcs/http/https. For L4 proxy, it can be one of tcp/tls/udp.",
 							"enum": [
 								"grpc",
 								"grpcs",
 								"http",
-								"https"
+								"https",
+								"tcp",
+								"tls",
+								"udp"
 							]
 						},
 						"service_name": {
@@ -2526,6 +2641,43 @@
 							"type": "object"
 						},
 						"passive": {
+							"default": {
+								"healthy": {
+									"http_statuses": [
+										200,
+										201,
+										202,
+										203,
+										204,
+										205,
+										206,
+										207,
+										208,
+										226,
+										300,
+										301,
+										302,
+										303,
+										304,
+										305,
+										306,
+										307,
+										308
+									],
+									"successes": 0
+								},
+								"type": "http",
+								"unhealthy": {
+									"http_failures": 0,
+									"http_statuses": [
+										429,
+										500,
+										503
+									],
+									"tcp_failures": 0,
+									"timeouts": 0
+								}
+							},
 							"properties": {
 								"healthy": {
 									"properties": {
@@ -2563,7 +2715,7 @@
 										"successes": {
 											"default": 5,
 											"maximum": 254,
-											"minimum": 1,
+											"minimum": 0,
 											"type": "integer"
 										}
 									},
@@ -2583,7 +2735,7 @@
 										"http_failures": {
 											"default": 5,
 											"maximum": 254,
-											"minimum": 1,
+											"minimum": 0,
 											"type": "integer"
 										},
 										"http_statuses": {
@@ -2604,13 +2756,13 @@
 										"tcp_failures": {
 											"default": 2,
 											"maximum": 254,
-											"minimum": 1,
+											"minimum": 0,
 											"type": "integer"
 										},
 										"timeouts": {
 											"default": 7,
 											"maximum": 254,
-											"minimum": 1,
+											"minimum": 0,
 											"type": "integer"
 										}
 									},
@@ -2697,7 +2849,6 @@
 				},
 				"labels": {
 					"description": "key/value pairs to specify attributes",
-					"maxProperties": 16,
 					"patternProperties": {
 						".*": {
 							"description": "value of label",
@@ -2784,11 +2935,15 @@
 				},
 				"scheme": {
 					"default": "http",
+					"description": "The scheme of the upstream. For L7 proxy, it can be one of grpc/grpcs/http/https. For L4 proxy, it can be one of tcp/tls/udp.",
 					"enum": [
 						"grpc",
 						"grpcs",
 						"http",
-						"https"
+						"https",
+						"tcp",
+						"tls",
+						"udp"
 					]
 				},
 				"service_name": {
@@ -3073,6 +3228,21 @@
 					}
 				],
 				"properties": {
+					"access_denied_redirect_uri": {
+						"maxLength": 2048,
+						"minLength": 1,
+						"type": "string"
+					},
+					"access_token_expires_in": {
+						"default": 300,
+						"minimum": 1,
+						"type": "integer"
+					},
+					"access_token_expires_leeway": {
+						"default": 0,
+						"minimum": 0,
+						"type": "integer"
+					},
 					"audience": {
 						"description": "Deprecated, use `client_id` instead.",
 						"maxLength": 100,
@@ -3151,6 +3321,16 @@
 						],
 						"type": "string"
 					},
+					"refresh_token_expires_in": {
+						"default": 3600,
+						"minimum": 1,
+						"type": "integer"
+					},
+					"refresh_token_expires_leeway": {
+						"default": 0,
+						"minimum": 0,
+						"type": "integer"
+					},
 					"resource_registration_endpoint": {
 						"maxLength": 4096,
 						"minLength": 1,
@@ -3171,6 +3351,83 @@
 						"type": "string"
 					}
 				},
+				"type": "object"
+			},
+			"version": 0.1
+		},
+		"aws-lambda": {
+			"priority": -1899,
+			"schema": {
+				"$comment": "this is a mark for our injected plugin schema",
+				"properties": {
+					"authorization": {
+						"properties": {
+							"apikey": {
+								"type": "string"
+							},
+							"iam": {
+								"properties": {
+									"accesskey": {
+										"description": "access key id from from aws iam console",
+										"type": "string"
+									},
+									"aws_region": {
+										"default": "us-east-1",
+										"description": "the aws region that is receiving the request",
+										"type": "string"
+									},
+									"secretkey": {
+										"description": "secret access key from from aws iam console",
+										"type": "string"
+									},
+									"service": {
+										"default": "execute-api",
+										"description": "the service that is receiving the request",
+										"type": "string"
+									}
+								},
+								"required": [
+									"accesskey",
+									"secretkey"
+								],
+								"type": "object"
+							}
+						},
+						"type": "object"
+					},
+					"disable": {
+						"type": "boolean"
+					},
+					"function_uri": {
+						"type": "string"
+					},
+					"keepalive": {
+						"default": true,
+						"type": "boolean"
+					},
+					"keepalive_pool": {
+						"default": 5,
+						"minimum": 1,
+						"type": "integer"
+					},
+					"keepalive_timeout": {
+						"default": 60000,
+						"minimum": 1000,
+						"type": "integer"
+					},
+					"ssl_verify": {
+						"default": true,
+						"type": "boolean"
+					},
+					"timeout": {
+						"default": 3000,
+						"minimum": 100,
+						"type": "integer"
+					}
+				},
+				"required": [
+					"function_uri"
+				],
 				"type": "object"
 			},
 			"version": 0.1
@@ -3264,6 +3521,10 @@
 				"properties": {
 					"disable": {
 						"type": "boolean"
+					},
+					"hide_credentials": {
+						"default": false,
+						"type": "boolean"
 					}
 				},
 				"title": "work with route or service object",
@@ -3295,6 +3556,97 @@
 				"type": "object"
 			},
 			"scope": "global",
+			"version": 0.1
+		},
+		"clickhouse-logger": {
+			"metadata_schema": {
+				"properties": {
+					"log_format": {
+						"default": {
+							"@timestamp": "$time_iso8601",
+							"client_ip": "$remote_addr",
+							"host": "$host"
+						},
+						"type": "object"
+					}
+				},
+				"type": "object"
+			},
+			"priority": 398,
+			"schema": {
+				"$comment": "this is a mark for our injected plugin schema",
+				"properties": {
+					"batch_max_size": {
+						"default": 1000,
+						"minimum": 1,
+						"type": "integer"
+					},
+					"buffer_duration": {
+						"default": 60,
+						"minimum": 1,
+						"type": "integer"
+					},
+					"database": {
+						"default": "",
+						"type": "string"
+					},
+					"disable": {
+						"type": "boolean"
+					},
+					"endpoint_addr": {
+						"pattern": "^[^\\/]+:\\/\\/([\\da-zA-Z.-]+|\\[[\\da-fA-F:]+\\])(:\\d+)?",
+						"type": "string"
+					},
+					"inactive_timeout": {
+						"default": 5,
+						"minimum": 1,
+						"type": "integer"
+					},
+					"logtable": {
+						"default": "",
+						"type": "string"
+					},
+					"max_retry_count": {
+						"default": 0,
+						"minimum": 0,
+						"type": "integer"
+					},
+					"name": {
+						"default": "clickhouse-logger",
+						"type": "string"
+					},
+					"password": {
+						"default": "",
+						"type": "string"
+					},
+					"retry_delay": {
+						"default": 1,
+						"minimum": 0,
+						"type": "integer"
+					},
+					"ssl_verify": {
+						"default": true,
+						"type": "boolean"
+					},
+					"timeout": {
+						"default": 3,
+						"minimum": 1,
+						"type": "integer"
+					},
+					"user": {
+						"default": "",
+						"type": "string"
+					}
+				},
+				"required": [
+					"database",
+					"endpoint_addr",
+					"logtable",
+					"password",
+					"user"
+				],
+				"type": "object"
+			},
 			"version": 0.1
 		},
 		"client-control": {
@@ -3381,6 +3733,9 @@
 						"minimum": 200,
 						"type": "integer"
 					},
+					"rejected_msg": {
+						"type": "string"
+					},
 					"type": {
 						"default": "consumer_name",
 						"enum": [
@@ -3403,6 +3758,18 @@
 			"version": 0.1
 		},
 		"cors": {
+			"metadata_schema": {
+				"properties": {
+					"allow_origins": {
+						"additionalProperties": {
+							"pattern": "^(\\*|\\*\\*|null|\\w+://[^,]+(,\\w+://[^,]+)*)$",
+							"type": "string"
+						},
+						"type": "object"
+					}
+				},
+				"type": "object"
+			},
 			"priority": 4000,
 			"schema": {
 				"$comment": "this is a mark for our injected plugin schema",
@@ -3427,6 +3794,17 @@
 						"description": "you can use '*' to allow all origins when no credentials,'**' to allow forcefully(it will bring some security risks, be carefully),multiple origin use ',' to split. default: *.",
 						"pattern": "^(\\*|\\*\\*|null|\\w+://[^,]+(,\\w+://[^,]+)*)$",
 						"type": "string"
+					},
+					"allow_origins_by_metadata": {
+						"description": "set allowed origins by referencing origins in plugin metadata",
+						"items": {
+							"maxLength": 4096,
+							"minLength": 1,
+							"type": "string"
+						},
+						"minItems": 1,
+						"type": "array",
+						"uniqueItems": true
 					},
 					"allow_origins_by_regex": {
 						"description": "you can use regex to allow specific origins when no credentials,for example use [.*\\.test.com] to allow a.test.com and b.test.com",
@@ -3453,6 +3831,36 @@
 						"type": "integer"
 					}
 				},
+				"type": "object"
+			},
+			"version": 0.1
+		},
+		"csrf": {
+			"priority": 2980,
+			"schema": {
+				"$comment": "this is a mark for our injected plugin schema",
+				"properties": {
+					"disable": {
+						"type": "boolean"
+					},
+					"expires": {
+						"default": 7200,
+						"description": "expires time(s) for csrf token",
+						"type": "integer"
+					},
+					"key": {
+						"description": "use to generate csrf token",
+						"type": "string"
+					},
+					"name": {
+						"default": "apisix-csrf-token",
+						"description": "the csrf token name",
+						"type": "string"
+					}
+				},
+				"required": [
+					"key"
+				],
 				"type": "object"
 			},
 			"version": 0.1
@@ -3490,7 +3898,7 @@
 				"$comment": "this is a mark for our injected plugin schema",
 				"properties": {
 					"batch_max_size": {
-						"default": 5000,
+						"default": 1000,
 						"minimum": 1,
 						"type": "integer"
 					},
@@ -3508,13 +3916,22 @@
 						"type": "integer"
 					},
 					"max_retry_count": {
-						"default": 1,
-						"minimum": 1,
+						"default": 0,
+						"minimum": 0,
 						"type": "integer"
+					},
+					"name": {
+						"default": "datadog",
+						"type": "string"
 					},
 					"prefer_name": {
 						"default": true,
 						"type": "boolean"
+					},
+					"retry_delay": {
+						"default": 1,
+						"minimum": 0,
+						"type": "integer"
 					}
 				},
 				"type": "object"
@@ -3613,6 +4030,11 @@
 					},
 					{
 						"required": [
+							"clickhouse"
+						]
+					},
+					{
+						"required": [
 							"host",
 							"port"
 						]
@@ -3628,6 +4050,41 @@
 						"default": 60,
 						"minimum": 1,
 						"type": "integer"
+					},
+					"clickhouse": {
+						"properties": {
+							"database": {
+								"default": "",
+								"type": "string"
+							},
+							"endpoint_addr": {
+								"1": {
+									"pattern": "^[^\\/]+:\\/\\/([\\da-zA-Z.-]+|\\[[\\da-fA-F:]+\\])(:\\d+)?",
+									"type": "string"
+								},
+								"default": "http://127.0.0.1:8123"
+							},
+							"logtable": {
+								"default": "",
+								"type": "string"
+							},
+							"password": {
+								"default": "",
+								"type": "string"
+							},
+							"user": {
+								"default": "default",
+								"type": "string"
+							}
+						},
+						"required": [
+							"database",
+							"endpoint_addr",
+							"logtable",
+							"password",
+							"user"
+						],
+						"type": "object"
 					},
 					"host": {
 						"1": {
@@ -3805,6 +4262,10 @@
 			"schema": {
 				"$comment": "this is a mark for our injected plugin schema",
 				"properties": {
+					"allow_degradation": {
+						"default": false,
+						"type": "boolean"
+					},
 					"conf": {
 						"items": {
 							"properties": {
@@ -3839,6 +4300,10 @@
 			"schema": {
 				"$comment": "this is a mark for our injected plugin schema",
 				"properties": {
+					"allow_degradation": {
+						"default": false,
+						"type": "boolean"
+					},
 					"conf": {
 						"items": {
 							"properties": {
@@ -3934,6 +4399,227 @@
 			},
 			"version": 0.1
 		},
+		"file-logger": {
+			"metadata_schema": {
+				"properties": {
+					"log_format": {
+						"default": {
+							"@timestamp": "$time_iso8601",
+							"client_ip": "$remote_addr",
+							"host": "$host"
+						},
+						"type": "object"
+					}
+				},
+				"type": "object"
+			},
+			"priority": 399,
+			"schema": {
+				"$comment": "this is a mark for our injected plugin schema",
+				"properties": {
+					"disable": {
+						"type": "boolean"
+					},
+					"path": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"path"
+				],
+				"type": "object"
+			},
+			"version": 0.1
+		},
+		"forward-auth": {
+			"priority": 2002,
+			"schema": {
+				"$comment": "this is a mark for our injected plugin schema",
+				"properties": {
+					"client_headers": {
+						"default": {},
+						"description": "authorization response header that will be sent tothe client when authorizing failed",
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
+					},
+					"disable": {
+						"type": "boolean"
+					},
+					"keepalive": {
+						"default": true,
+						"type": "boolean"
+					},
+					"keepalive_pool": {
+						"default": 5,
+						"minimum": 1,
+						"type": "integer"
+					},
+					"keepalive_timeout": {
+						"default": 60000,
+						"minimum": 1000,
+						"type": "integer"
+					},
+					"request_headers": {
+						"default": {},
+						"description": "client request header that will be sent to the authorization service",
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
+					},
+					"ssl_verify": {
+						"default": true,
+						"type": "boolean"
+					},
+					"timeout": {
+						"default": 3000,
+						"description": "timeout in milliseconds",
+						"maximum": 60000,
+						"minimum": 1,
+						"type": "integer"
+					},
+					"upstream_headers": {
+						"default": {},
+						"description": "authorization response header that will be sent to the upstream",
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
+					},
+					"uri": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"uri"
+				],
+				"type": "object"
+			},
+			"version": 0.1
+		},
+		"google-cloud-logging": {
+			"priority": 407,
+			"schema": {
+				"$comment": "this is a mark for our injected plugin schema",
+				"oneOf": [
+					{
+						"required": [
+							"auth_config"
+						]
+					},
+					{
+						"required": [
+							"auth_file"
+						]
+					}
+				],
+				"properties": {
+					"auth_config": {
+						"properties": {
+							"entries_uri": {
+								"default": "https://logging.googleapis.com/v2/entries:write",
+								"type": "string"
+							},
+							"private_key": {
+								"type": "string"
+							},
+							"project_id": {
+								"type": "string"
+							},
+							"scopes": {
+								"default": [
+									"https://www.googleapis.com/auth/cloud-platform",
+									"https://www.googleapis.com/auth/logging.admin",
+									"https://www.googleapis.com/auth/logging.read",
+									"https://www.googleapis.com/auth/logging.write"
+								],
+								"items": {
+									"description": "Google OAuth2 Authorization Scopes",
+									"type": "string"
+								},
+								"minItems": 1,
+								"type": "array",
+								"uniqueItems": true
+							},
+							"token_uri": {
+								"default": "https://oauth2.googleapis.com/token",
+								"type": "string"
+							}
+						},
+						"required": [
+							"private_key",
+							"project_id",
+							"token_uri"
+						],
+						"type": "object"
+					},
+					"auth_file": {
+						"type": "string"
+					},
+					"batch_max_size": {
+						"default": 1000,
+						"minimum": 1,
+						"type": "integer"
+					},
+					"buffer_duration": {
+						"default": 60,
+						"minimum": 1,
+						"type": "integer"
+					},
+					"disable": {
+						"type": "boolean"
+					},
+					"inactive_timeout": {
+						"default": 5,
+						"minimum": 1,
+						"type": "integer"
+					},
+					"log_id": {
+						"default": "apisix.apache.org%2Flogs",
+						"type": "string"
+					},
+					"max_retry_count": {
+						"default": 0,
+						"minimum": 0,
+						"type": "integer"
+					},
+					"name": {
+						"default": "google-cloud-logging",
+						"type": "string"
+					},
+					"resource": {
+						"default": {
+							"type": "global"
+						},
+						"properties": {
+							"labels": {
+								"type": "object"
+							},
+							"type": {
+								"type": "string"
+							}
+						},
+						"required": [
+							"type"
+						],
+						"type": "object"
+					},
+					"retry_delay": {
+						"default": 1,
+						"minimum": 0,
+						"type": "integer"
+					},
+					"ssl_verify": {
+						"default": true,
+						"type": "boolean"
+					}
+				},
+				"type": "object"
+			},
+			"version": 0.1
+		},
 		"grpc-transcode": {
 			"priority": 506,
 			"schema": {
@@ -4020,6 +4706,19 @@
 					"proto_id",
 					"service"
 				],
+				"type": "object"
+			},
+			"version": 0.1
+		},
+		"grpc-web": {
+			"priority": 505,
+			"schema": {
+				"$comment": "this is a mark for our injected plugin schema",
+				"properties": {
+					"disable": {
+						"type": "boolean"
+					}
+				},
 				"type": "object"
 			},
 			"version": 0.1
@@ -4225,6 +4924,17 @@
 						"default": false,
 						"type": "boolean"
 					},
+					"include_resp_body": {
+						"default": false,
+						"type": "boolean"
+					},
+					"include_resp_body_expr": {
+						"items": {
+							"type": "array"
+						},
+						"minItems": 1,
+						"type": "array"
+					},
 					"max_retry_count": {
 						"default": 0,
 						"minimum": 0,
@@ -4238,6 +4948,10 @@
 						"default": 1,
 						"minimum": 0,
 						"type": "integer"
+					},
+					"ssl_verify": {
+						"default": false,
+						"type": "boolean"
 					},
 					"timeout": {
 						"default": 3,
@@ -4377,6 +5091,22 @@
 									"private_key",
 									"public_key"
 								]
+							},
+							{
+								"properties": {
+									"algorithm": {
+										"enum": [
+											"RS256"
+										]
+									},
+									"vault": {
+										"properties": {},
+										"type": "object"
+									}
+								},
+								"required": [
+									"vault"
+								]
 							}
 						]
 					}
@@ -4405,6 +5135,10 @@
 					},
 					"secret": {
 						"type": "string"
+					},
+					"vault": {
+						"properties": {},
+						"type": "object"
 					}
 				},
 				"required": [
@@ -4416,8 +5150,20 @@
 			"schema": {
 				"$comment": "this is a mark for our injected plugin schema",
 				"properties": {
+					"cookie": {
+						"default": "jwt",
+						"type": "string"
+					},
 					"disable": {
 						"type": "boolean"
+					},
+					"header": {
+						"default": "authorization",
+						"type": "string"
+					},
+					"query": {
+						"default": "jwt",
+						"type": "string"
 					}
 				},
 				"type": "object"
@@ -4484,9 +5230,17 @@
 					},
 					"include_req_body_expr": {
 						"items": {
-							"items": {
-								"type": "string"
-							},
+							"type": "array"
+						},
+						"minItems": 1,
+						"type": "array"
+					},
+					"include_resp_body": {
+						"default": false,
+						"type": "boolean"
+					},
+					"include_resp_body_expr": {
+						"items": {
 							"type": "array"
 						},
 						"minItems": 1,
@@ -4691,88 +5445,53 @@
 			"priority": 1002,
 			"schema": {
 				"$comment": "this is a mark for our injected plugin schema",
-				"dependencies": {
-					"policy": {
-						"oneOf": [
-							{
-								"properties": {
-									"policy": {
-										"enum": [
-											"local"
-										]
-									}
-								}
-							},
-							{
-								"properties": {
-									"policy": {
-										"enum": [
-											"redis"
-										]
-									},
-									"redis_database": {
-										"default": 0,
-										"minimum": 0,
-										"type": "integer"
-									},
-									"redis_host": {
-										"minLength": 2,
-										"type": "string"
-									},
-									"redis_password": {
-										"minLength": 0,
-										"type": "string"
-									},
-									"redis_port": {
-										"default": 6379,
-										"minimum": 1,
-										"type": "integer"
-									},
-									"redis_timeout": {
-										"default": 1000,
-										"minimum": 1,
-										"type": "integer"
-									}
-								},
-								"required": [
-									"redis_host"
-								]
-							},
-							{
-								"properties": {
-									"policy": {
-										"enum": [
-											"redis-cluster"
-										]
-									},
-									"redis_cluster_name": {
-										"type": "string"
-									},
-									"redis_cluster_nodes": {
-										"items": {
-											"maxLength": 100,
-											"minLength": 2,
-											"type": "string"
-										},
-										"minItems": 2,
-										"type": "array"
-									},
-									"redis_password": {
-										"minLength": 0,
-										"type": "string"
-									},
-									"redis_timeout": {
-										"default": 1000,
-										"minimum": 1,
-										"type": "integer"
-									}
-								},
-								"required": [
-									"redis_cluster_name",
-									"redis_cluster_nodes"
+				"else": {
+					"if": {
+						"properties": {
+							"policy": {
+								"enum": [
+									"redis-cluster"
 								]
 							}
+						}
+					},
+					"then": {
+						"properties": {
+							"redis_cluster_name": {
+								"type": "string"
+							},
+							"redis_cluster_nodes": {
+								"items": {
+									"maxLength": 100,
+									"minLength": 2,
+									"type": "string"
+								},
+								"minItems": 2,
+								"type": "array"
+							},
+							"redis_password": {
+								"minLength": 0,
+								"type": "string"
+							},
+							"redis_timeout": {
+								"default": 1000,
+								"minimum": 1,
+								"type": "integer"
+							}
+						},
+						"required": [
+							"redis_cluster_name",
+							"redis_cluster_nodes"
 						]
+					}
+				},
+				"if": {
+					"properties": {
+						"policy": {
+							"enum": [
+								"redis"
+							]
+						}
 					}
 				},
 				"properties": {
@@ -4787,6 +5506,9 @@
 					"disable": {
 						"type": "boolean"
 					},
+					"group": {
+						"type": "string"
+					},
 					"key": {
 						"default": "remote_addr",
 						"type": "string"
@@ -4794,6 +5516,7 @@
 					"key_type": {
 						"default": "var",
 						"enum": [
+							"constant",
 							"var",
 							"var_combination"
 						],
@@ -4831,6 +5554,36 @@
 					"count",
 					"time_window"
 				],
+				"then": {
+					"properties": {
+						"redis_database": {
+							"default": 0,
+							"minimum": 0,
+							"type": "integer"
+						},
+						"redis_host": {
+							"minLength": 2,
+							"type": "string"
+						},
+						"redis_password": {
+							"minLength": 0,
+							"type": "string"
+						},
+						"redis_port": {
+							"default": 6379,
+							"minimum": 1,
+							"type": "integer"
+						},
+						"redis_timeout": {
+							"default": 1000,
+							"minimum": 1,
+							"type": "integer"
+						}
+					},
+					"required": [
+						"redis_host"
+					]
+				},
 				"type": "object"
 			},
 			"version": 0.4
@@ -4904,6 +5657,214 @@
 			"scope": "global",
 			"version": 0.1
 		},
+		"loggly": {
+			"metadata_schema": {
+				"properties": {
+					"host": {
+						"default": "logs-01.loggly.com",
+						"type": "string"
+					},
+					"log_format": {
+						"type": "object"
+					},
+					"port": {
+						"default": 514,
+						"type": "integer"
+					},
+					"protocol": {
+						"default": "syslog",
+						"enum": [
+							"http",
+							"https",
+							"syslog"
+						],
+						"type": "string"
+					},
+					"timeout": {
+						"default": 5000,
+						"minimum": 1,
+						"type": "integer"
+					}
+				},
+				"type": "object"
+			},
+			"priority": 411,
+			"schema": {
+				"$comment": "this is a mark for our injected plugin schema",
+				"properties": {
+					"batch_max_size": {
+						"default": 1000,
+						"minimum": 1,
+						"type": "integer"
+					},
+					"buffer_duration": {
+						"default": 60,
+						"minimum": 1,
+						"type": "integer"
+					},
+					"customer_token": {
+						"type": "string"
+					},
+					"disable": {
+						"type": "boolean"
+					},
+					"inactive_timeout": {
+						"default": 5,
+						"minimum": 1,
+						"type": "integer"
+					},
+					"include_req_body": {
+						"default": false,
+						"type": "boolean"
+					},
+					"include_resp_body": {
+						"default": false,
+						"type": "boolean"
+					},
+					"include_resp_body_expr": {
+						"items": {
+							"type": "array"
+						},
+						"minItems": 1,
+						"type": "array"
+					},
+					"max_retry_count": {
+						"default": 0,
+						"minimum": 0,
+						"type": "integer"
+					},
+					"name": {
+						"default": "loggly",
+						"type": "string"
+					},
+					"retry_delay": {
+						"default": 1,
+						"minimum": 0,
+						"type": "integer"
+					},
+					"severity": {
+						"default": "INFO",
+						"description": "base severity log level",
+						"enum": [
+							"ALERT",
+							"CRIT",
+							"DEBUG",
+							"EMEGR",
+							"ERR",
+							"INFO",
+							"NOTICE",
+							"WARNING",
+							"alert",
+							"crit",
+							"debug",
+							"emegr",
+							"err",
+							"info",
+							"notice",
+							"warning"
+						],
+						"type": "string"
+					},
+					"severity_map": {
+						"additionalProperties": false,
+						"description": "upstream response code vs syslog severity mapping",
+						"patternProperties": {
+							"^[1-5][0-9]{2}$": {
+								"description": "keys are HTTP status code, values are severity",
+								"enum": [
+									"ALERT",
+									"CRIT",
+									"DEBUG",
+									"EMEGR",
+									"ERR",
+									"INFO",
+									"NOTICE",
+									"WARNING",
+									"alert",
+									"crit",
+									"debug",
+									"emegr",
+									"err",
+									"info",
+									"notice",
+									"warning"
+								],
+								"type": "string"
+							}
+						},
+						"type": "object"
+					},
+					"ssl_verify": {
+						"default": true,
+						"type": "boolean"
+					},
+					"tags": {
+						"default": [
+							"apisix"
+						],
+						"items": {
+							"pattern": "^(?!tag=)[ -~]*",
+							"type": "string"
+						},
+						"minItems": 1,
+						"type": "array"
+					}
+				},
+				"required": [
+					"customer_token"
+				],
+				"type": "object"
+			},
+			"version": 0.1
+		},
+		"mocking": {
+			"priority": 10900,
+			"schema": {
+				"$comment": "this is a mark for our injected plugin schema",
+				"anyOf": [
+					{
+						"required": [
+							"response_example"
+						]
+					},
+					{
+						"required": [
+							"response_schema"
+						]
+					}
+				],
+				"properties": {
+					"content_type": {
+						"default": "application/json;charset=utf8",
+						"type": "string"
+					},
+					"delay": {
+						"default": 0,
+						"type": "integer"
+					},
+					"disable": {
+						"type": "boolean"
+					},
+					"response_example": {
+						"type": "string"
+					},
+					"response_schema": {
+						"type": "object"
+					},
+					"response_status": {
+						"default": 200,
+						"minimum": 100,
+						"type": "integer"
+					},
+					"with_mock_header": {
+						"default": true,
+						"type": "boolean"
+					}
+				},
+				"type": "object"
+			},
+			"version": 0.1
+		},
 		"node-status": {
 			"priority": 1000,
 			"schema": {
@@ -4916,6 +5877,66 @@
 				"type": "object"
 			},
 			"scope": "global",
+			"version": 0.1
+		},
+		"opa": {
+			"priority": 2001,
+			"schema": {
+				"$comment": "this is a mark for our injected plugin schema",
+				"properties": {
+					"disable": {
+						"type": "boolean"
+					},
+					"host": {
+						"type": "string"
+					},
+					"keepalive": {
+						"default": true,
+						"type": "boolean"
+					},
+					"keepalive_pool": {
+						"default": 5,
+						"minimum": 1,
+						"type": "integer"
+					},
+					"keepalive_timeout": {
+						"default": 60000,
+						"minimum": 1000,
+						"type": "integer"
+					},
+					"policy": {
+						"type": "string"
+					},
+					"ssl_verify": {
+						"default": true,
+						"type": "boolean"
+					},
+					"timeout": {
+						"default": 3000,
+						"description": "timeout in milliseconds",
+						"maximum": 60000,
+						"minimum": 1,
+						"type": "integer"
+					},
+					"with_consumer": {
+						"default": false,
+						"type": "boolean"
+					},
+					"with_route": {
+						"default": false,
+						"type": "boolean"
+					},
+					"with_service": {
+						"default": false,
+						"type": "boolean"
+					}
+				},
+				"required": [
+					"host",
+					"policy"
+				],
+				"type": "object"
+			},
 			"version": 0.1
 		},
 		"openid-connect": {
@@ -4953,6 +5974,10 @@
 					},
 					"logout_path": {
 						"default": "/logout",
+						"type": "string"
+					},
+					"post_logout_redirect_uri": {
+						"description": "the URI will be redirect when request logout_path",
 						"type": "string"
 					},
 					"public_key": {
@@ -5003,6 +6028,171 @@
 					"client_id",
 					"client_secret",
 					"discovery"
+				],
+				"type": "object"
+			},
+			"version": 0.1
+		},
+		"opentelemetry": {
+			"priority": 12009,
+			"schema": {
+				"$comment": "this is a mark for our injected plugin schema",
+				"properties": {
+					"additional_attributes": {
+						"items": {
+							"minLength": 1,
+							"type": "string"
+						},
+						"type": "array"
+					},
+					"disable": {
+						"type": "boolean"
+					},
+					"sampler": {
+						"default": {
+							"name": "always_off",
+							"options": {
+								"fraction": 0,
+								"root": {
+									"name": "always_off"
+								}
+							}
+						},
+						"properties": {
+							"name": {
+								"default": "always_off",
+								"enum": [
+									"always_off",
+									"always_on",
+									"parent_base",
+									"trace_id_ratio"
+								],
+								"title": "sampling strategy",
+								"type": "string"
+							},
+							"options": {
+								"default": {
+									"fraction": 0,
+									"root": {
+										"name": "always_off"
+									}
+								},
+								"properties": {
+									"fraction": {
+										"default": 0,
+										"title": "trace_id_ratio fraction",
+										"type": "number"
+									},
+									"root": {
+										"default": {
+											"name": "always_off",
+											"options": {
+												"fraction": 0
+											}
+										},
+										"properties": {
+											"name": {
+												"default": "always_off",
+												"enum": [
+													"always_off",
+													"always_on",
+													"trace_id_ratio"
+												],
+												"title": "sampling strategy",
+												"type": "string"
+											},
+											"options": {
+												"default": {
+													"fraction": 0
+												},
+												"properties": {
+													"fraction": {
+														"default": 0,
+														"title": "trace_id_ratio fraction parameter",
+														"type": "number"
+													}
+												},
+												"type": "object"
+											}
+										},
+										"title": "parent_base root sampler",
+										"type": "object"
+									}
+								},
+								"type": "object"
+							}
+						},
+						"type": "object"
+					}
+				},
+				"type": "object"
+			},
+			"version": 0.1
+		},
+		"openwhisk": {
+			"priority": -1901,
+			"schema": {
+				"$comment": "this is a mark for our injected plugin schema",
+				"properties": {
+					"action": {
+						"maxLength": 256,
+						"pattern": "\\A([\\w]|[\\w][\\w@ .-]*[\\w@.-]+)\\z",
+						"type": "string"
+					},
+					"api_host": {
+						"type": "string"
+					},
+					"disable": {
+						"type": "boolean"
+					},
+					"keepalive": {
+						"default": true,
+						"type": "boolean"
+					},
+					"keepalive_pool": {
+						"default": 5,
+						"minimum": 1,
+						"type": "integer"
+					},
+					"keepalive_timeout": {
+						"default": 60000,
+						"minimum": 1000,
+						"type": "integer"
+					},
+					"namespace": {
+						"maxLength": 256,
+						"pattern": "\\A([\\w]|[\\w][\\w@ .-]*[\\w@.-]+)\\z",
+						"type": "string"
+					},
+					"package": {
+						"maxLength": 256,
+						"pattern": "\\A([\\w]|[\\w][\\w@ .-]*[\\w@.-]+)\\z",
+						"type": "string"
+					},
+					"result": {
+						"default": true,
+						"type": "boolean"
+					},
+					"service_token": {
+						"type": "string"
+					},
+					"ssl_verify": {
+						"default": true,
+						"type": "boolean"
+					},
+					"timeout": {
+						"default": 3000,
+						"description": "timeout in milliseconds",
+						"maximum": 60000,
+						"minimum": 1,
+						"type": "integer"
+					}
+				},
+				"required": [
+					"action",
+					"api_host",
+					"namespace",
+					"service_token"
 				],
 				"type": "object"
 			},
@@ -5128,17 +6318,37 @@
 			},
 			"version": 0.2
 		},
+		"proxy-control": {
+			"priority": 21990,
+			"schema": {
+				"$comment": "this is a mark for our injected plugin schema",
+				"properties": {
+					"disable": {
+						"type": "boolean"
+					},
+					"request_buffering": {
+						"default": true,
+						"type": "boolean"
+					}
+				},
+				"type": "object"
+			},
+			"version": 0.1
+		},
 		"proxy-mirror": {
 			"priority": 1010,
 			"schema": {
 				"$comment": "this is a mark for our injected plugin schema",
-				"minProperties": 1,
 				"properties": {
 					"disable": {
 						"type": "boolean"
 					},
 					"host": {
-						"pattern": "^http(s)?:\\/\\/[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(\\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+(:[0-9]{1,5})?$",
+						"pattern": "^http(s)?:\\/\\/([\\da-zA-Z.-]+|\\[[\\da-fA-F:]+\\])(:\\d+)?$",
+						"type": "string"
+					},
+					"path": {
+						"pattern": "^/[^?&]+$",
 						"type": "string"
 					},
 					"sample_ratio": {
@@ -5217,6 +6427,22 @@
 						"maxLength": 4096,
 						"minLength": 1,
 						"pattern": "^\\/.*",
+						"type": "string"
+					}
+				},
+				"type": "object"
+			},
+			"version": 0.1
+		},
+		"public-api": {
+			"priority": 501,
+			"schema": {
+				"$comment": "this is a mark for our injected plugin schema",
+				"properties": {
+					"disable": {
+						"type": "boolean"
+					},
+					"uri": {
 						"type": "string"
 					}
 				},
@@ -5439,6 +6665,12 @@
 					"header_schema": {
 						"type": "object"
 					},
+					"rejected_code": {
+						"default": 400,
+						"maximum": 599,
+						"minimum": 200,
+						"type": "integer"
+					},
 					"rejected_msg": {
 						"maxLength": 256,
 						"minLength": 1,
@@ -5487,6 +6719,128 @@
 			},
 			"version": 0.1
 		},
+		"rocketmq-logger": {
+			"metadata_schema": {
+				"properties": {
+					"log_format": {
+						"default": {
+							"@timestamp": "$time_iso8601",
+							"client_ip": "$remote_addr",
+							"host": "$host"
+						},
+						"type": "object"
+					}
+				},
+				"type": "object"
+			},
+			"priority": 402,
+			"schema": {
+				"$comment": "this is a mark for our injected plugin schema",
+				"properties": {
+					"access_key": {
+						"default": "",
+						"type": "string"
+					},
+					"batch_max_size": {
+						"default": 1000,
+						"minimum": 1,
+						"type": "integer"
+					},
+					"buffer_duration": {
+						"default": 60,
+						"minimum": 1,
+						"type": "integer"
+					},
+					"disable": {
+						"type": "boolean"
+					},
+					"inactive_timeout": {
+						"default": 5,
+						"minimum": 1,
+						"type": "integer"
+					},
+					"include_req_body": {
+						"default": false,
+						"type": "boolean"
+					},
+					"include_req_body_expr": {
+						"items": {
+							"type": "array"
+						},
+						"minItems": 1,
+						"type": "array"
+					},
+					"include_resp_body": {
+						"default": false,
+						"type": "boolean"
+					},
+					"include_resp_body_expr": {
+						"items": {
+							"type": "array"
+						},
+						"minItems": 1,
+						"type": "array"
+					},
+					"key": {
+						"type": "string"
+					},
+					"max_retry_count": {
+						"default": 0,
+						"minimum": 0,
+						"type": "integer"
+					},
+					"meta_format": {
+						"default": "default",
+						"enum": [
+							"default",
+							"origin"
+						],
+						"type": "string"
+					},
+					"name": {
+						"default": "rocketmq logger",
+						"type": "string"
+					},
+					"nameserver_list": {
+						"items": {
+							"type": "string"
+						},
+						"minItems": 1,
+						"type": "array"
+					},
+					"retry_delay": {
+						"default": 1,
+						"minimum": 0,
+						"type": "integer"
+					},
+					"secret_key": {
+						"default": "",
+						"type": "string"
+					},
+					"tag": {
+						"type": "string"
+					},
+					"timeout": {
+						"default": 3,
+						"minimum": 1,
+						"type": "integer"
+					},
+					"topic": {
+						"type": "string"
+					},
+					"use_tls": {
+						"default": false,
+						"type": "boolean"
+					}
+				},
+				"required": [
+					"nameserver_list",
+					"topic"
+				],
+				"type": "object"
+			},
+			"version": 0.1
+		},
 		"server-info": {
 			"priority": 990,
 			"schema": {
@@ -5520,7 +6874,7 @@
 						"default": "access",
 						"enum": [
 							"access",
-							"balancer",
+							"before_proxy",
 							"body_filter",
 							"header_filter",
 							"log",
@@ -5555,7 +6909,7 @@
 						"default": "access",
 						"enum": [
 							"access",
-							"balancer",
+							"before_proxy",
 							"body_filter",
 							"header_filter",
 							"log",
@@ -5572,7 +6926,7 @@
 			"version": 0.1
 		},
 		"skywalking": {
-			"priority": -1100,
+			"priority": 12010,
 			"schema": {
 				"$comment": "this is a mark for our injected plugin schema",
 				"properties": {
@@ -5746,6 +7100,79 @@
 			},
 			"version": 0.1
 		},
+		"splunk-hec-logging": {
+			"priority": 409,
+			"schema": {
+				"$comment": "this is a mark for our injected plugin schema",
+				"properties": {
+					"batch_max_size": {
+						"default": 1000,
+						"minimum": 1,
+						"type": "integer"
+					},
+					"buffer_duration": {
+						"default": 60,
+						"minimum": 1,
+						"type": "integer"
+					},
+					"disable": {
+						"type": "boolean"
+					},
+					"endpoint": {
+						"properties": {
+							"channel": {
+								"type": "string"
+							},
+							"timeout": {
+								"default": 10,
+								"minimum": 1,
+								"type": "integer"
+							},
+							"token": {
+								"type": "string"
+							},
+							"uri": {
+								"pattern": "^[^\\/]+:\\/\\/([\\da-zA-Z.-]+|\\[[\\da-fA-F:]+\\])(:\\d+)?",
+								"type": "string"
+							}
+						},
+						"required": [
+							"token",
+							"uri"
+						],
+						"type": "object"
+					},
+					"inactive_timeout": {
+						"default": 5,
+						"minimum": 1,
+						"type": "integer"
+					},
+					"max_retry_count": {
+						"default": 0,
+						"minimum": 0,
+						"type": "integer"
+					},
+					"name": {
+						"default": "splunk-hec-logging",
+						"type": "string"
+					},
+					"retry_delay": {
+						"default": 1,
+						"minimum": 0,
+						"type": "integer"
+					},
+					"ssl_verify": {
+						"default": true,
+						"type": "boolean"
+					}
+				},
+				"required": [
+					"endpoint"
+				],
+				"type": "object"
+			},
+			"version": 0.1
+		},
 		"syslog": {
 			"priority": 401,
 			"schema": {
@@ -5776,12 +7203,21 @@
 					"host": {
 						"type": "string"
 					},
+					"inactive_timeout": {
+						"default": 5,
+						"minimum": 1,
+						"type": "integer"
+					},
 					"include_req_body": {
 						"default": false,
 						"type": "boolean"
 					},
+					"max_retry_count": {
+						"default": 0,
+						"minimum": 0,
+						"type": "integer"
+					},
 					"max_retry_times": {
-						"default": 1,
 						"minimum": 1,
 						"type": "integer"
 					},
@@ -5797,8 +7233,12 @@
 					"port": {
 						"type": "integer"
 					},
-					"retry_interval": {
+					"retry_delay": {
 						"default": 1,
+						"minimum": 0,
+						"type": "integer"
+					},
+					"retry_interval": {
 						"minimum": 0,
 						"type": "integer"
 					},
@@ -6085,6 +7525,43 @@
 																"type": "object"
 															},
 															"passive": {
+																"default": {
+																	"healthy": {
+																		"http_statuses": [
+																			200,
+																			201,
+																			202,
+																			203,
+																			204,
+																			205,
+																			206,
+																			207,
+																			208,
+																			226,
+																			300,
+																			301,
+																			302,
+																			303,
+																			304,
+																			305,
+																			306,
+																			307,
+																			308
+																		],
+																		"successes": 0
+																	},
+																	"type": "http",
+																	"unhealthy": {
+																		"http_failures": 0,
+																		"http_statuses": [
+																			429,
+																			500,
+																			503
+																		],
+																		"tcp_failures": 0,
+																		"timeouts": 0
+																	}
+																},
 																"properties": {
 																	"healthy": {
 																		"properties": {
@@ -6122,7 +7599,7 @@
 																			"successes": {
 																				"default": 5,
 																				"maximum": 254,
-																				"minimum": 1,
+																				"minimum": 0,
 																				"type": "integer"
 																			}
 																		},
@@ -6142,7 +7619,7 @@
 																			"http_failures": {
 																				"default": 5,
 																				"maximum": 254,
-																				"minimum": 1,
+																				"minimum": 0,
 																				"type": "integer"
 																			},
 																			"http_statuses": {
@@ -6163,13 +7640,13 @@
 																			"tcp_failures": {
 																				"default": 2,
 																				"maximum": 254,
-																				"minimum": 1,
+																				"minimum": 0,
 																				"type": "integer"
 																			},
 																			"timeouts": {
 																				"default": 7,
 																				"maximum": 254,
-																				"minimum": 1,
+																				"minimum": 0,
 																				"type": "integer"
 																			}
 																		},
@@ -6256,7 +7733,6 @@
 													},
 													"labels": {
 														"description": "key/value pairs to specify attributes",
-														"maxProperties": 16,
 														"patternProperties": {
 															".*": {
 																"description": "value of label",
@@ -6343,11 +7819,15 @@
 													},
 													"scheme": {
 														"default": "http",
+														"description": "The scheme of the upstream. For L7 proxy, it can be one of grpc/grpcs/http/https. For L4 proxy, it can be one of tcp/tls/udp.",
 														"enum": [
 															"grpc",
 															"grpcs",
 															"http",
-															"https"
+															"https",
+															"tcp",
+															"tls",
+															"udp"
 														]
 													},
 													"service_name": {
@@ -6453,6 +7933,10 @@
 				"$comment": "this is a mark for our injected plugin schema",
 				"properties": {
 					"allowlist": {
+						"items": {
+							"minLength": 1,
+							"type": "string"
+						},
 						"minItems": 1,
 						"type": "array"
 					},
@@ -6461,6 +7945,10 @@
 						"type": "boolean"
 					},
 					"denylist": {
+						"items": {
+							"minLength": 1,
+							"type": "string"
+						},
 						"minItems": 1,
 						"type": "array"
 					},
@@ -6508,11 +7996,21 @@
 						"default": false,
 						"type": "boolean"
 					},
+					"max_retry_count": {
+						"default": 0,
+						"minimum": 0,
+						"type": "integer"
+					},
 					"name": {
 						"default": "udp logger",
 						"type": "string"
 					},
 					"port": {
+						"minimum": 0,
+						"type": "integer"
+					},
+					"retry_delay": {
+						"default": 1,
 						"minimum": 0,
 						"type": "integer"
 					},
@@ -6595,7 +8093,7 @@
 			"version": 0.1
 		},
 		"zipkin": {
-			"priority": 11011,
+			"priority": 12011,
 			"schema": {
 				"$comment": "this is a mark for our injected plugin schema",
 				"properties": {
@@ -6786,6 +8284,7 @@
 						"type": "string"
 					},
 					"upstream": {
+						"description": "Deprecated. We should configure upstream outside of the plugin",
 						"oneOf": [
 							{
 								"required": [
@@ -6816,8 +8315,7 @@
 				},
 				"required": [
 					"protocol_level",
-					"protocol_name",
-					"upstream"
+					"protocol_name"
 				],
 				"type": "object"
 			},

@@ -31,6 +31,7 @@ export default {
   'component.upstream.fields.discovery_type.type.consul_kv': 'Consul KV',
   'component.upstream.fields.discovery_type.type.nacos': 'Nacos',
   'component.upstream.fields.discovery_type.type.eureka': 'Eureka',
+  'component.upstream.fields.discovery_type.type.kubernetes': 'Kubernetes',
 
   'component.upstream.fields.discovery_args.group_name': 'Group Name',
   'component.upstream.fields.discovery_args.group_name.tooltip': 'Group Name',
@@ -135,7 +136,7 @@ export default {
   'component.upstream.fields.checks.active.unhealthy.interval.tooltip':
     'Interval between active health checks for unhealthy targets (in seconds). A value of zero indicates that active probes for healthy targets should not be performed.',
   'component.upstream.fields.checks.active.unhealthy.required':
-    'Please enter the unhelthy interval',
+    'Please enter the unhealthy interval',
 
   'component.upstream.fields.checks.passive.healthy.successes': 'Successes',
   'component.upstream.fields.checks.passive.healthy.successes.tooltip':
@@ -147,7 +148,7 @@ export default {
   'component.upstream.fields.checks.passive.unhealthy.timeouts.tooltip':
     'Number of timeouts in proxied traffic to consider a target unhealthy, as observed by passive health checks.',
 
-  'component.upstream.other.none': 'None',
+  'component.upstream.other.none': 'None (Only available when binding the service)',
   'component.upstream.other.pass_host-with-multiple-nodes.title':
     'Please check the target node configuration',
   'component.upstream.other.pass_host-with-multiple-nodes':

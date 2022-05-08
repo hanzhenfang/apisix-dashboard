@@ -36,15 +36,8 @@ var _ = ginkgo.Describe("Schema Test", func() {
 			Query:        "schema_type=consumer",
 			Headers:      map[string]string{"Authorization": base.GetToken()},
 			ExpectStatus: http.StatusOK,
-			ExpectBody: "{\"dependencies\":{\"algorithm\":{\"oneOf\":[{\"properties\":{\"algorithm\":" +
-				"{\"default\":\"HS256\",\"enum\":[\"HS256\",\"HS512\"]}}},{\"properties\":{\"algorithm\":" +
-				"{\"enum\":[\"RS256\"]},\"private_key\":{\"type\":\"string\"},\"public_key\":{\"type\":\"string\"}}," +
-				"\"required\":[\"private_key\",\"public_key\"]}]}},\"properties\":{\"algorithm\":{\"default\":" +
-				"\"HS256\",\"enum\":[\"HS256\",\"HS512\",\"RS256\"],\"type\":\"string\"},\"base64_secret\"" +
-				":{\"default\":false,\"type\":\"boolean\"},\"exp\":{\"default\":86400,\"minimum\":1,\"type\":" +
-				"\"integer\"},\"key\":{\"type\":\"string\"},\"secret\":{\"type\":\"string\"}}," +
-				"\"required\":[\"key\"],\"type\":\"object\"}",
-			Sleep: base.SleepTime,
+			ExpectBody:   "{\"dependencies\":{\"algorithm\":{\"oneOf\":[{\"properties\":{\"algorithm\":{\"default\":\"HS256\",\"enum\":[\"HS256\",\"HS512\"]}}},{\"properties\":{\"algorithm\":{\"enum\":[\"RS256\"]},\"private_key\":{\"type\":\"string\"},\"public_key\":{\"type\":\"string\"}},\"required\":[\"private_key\",\"public_key\"]},{\"properties\":{\"algorithm\":{\"enum\":[\"RS256\"]},\"vault\":{\"properties\":{},\"type\":\"object\"}},\"required\":[\"vault\"]}]}},\"properties\":{\"algorithm\":{\"default\":\"HS256\",\"enum\":[\"HS256\",\"HS512\",\"RS256\"],\"type\":\"string\"},\"base64_secret\":{\"default\":false,\"type\":\"boolean\"},\"exp\":{\"default\":86400,\"minimum\":1,\"type\":\"integer\"},\"key\":{\"type\":\"string\"},\"secret\":{\"type\":\"string\"},\"vault\":{\"properties\":{},\"type\":\"object\"}},\"required\":[\"key\"],\"type\":\"object\"}",
+			Sleep:        base.SleepTime,
 		}),
 		table.Entry("get schema of plugin `require-id`", base.HttpTestCase{
 			Object:       base.ManagerApiExpect(),
@@ -52,7 +45,7 @@ var _ = ginkgo.Describe("Schema Test", func() {
 			Path:         "/apisix/admin/schema/plugins/jwt-auth",
 			Headers:      map[string]string{"Authorization": base.GetToken()},
 			ExpectStatus: http.StatusOK,
-			ExpectBody:   "{\"$comment\":\"this is a mark for our injected plugin schema\",\"properties\":{\"disable\":{\"type\":\"boolean\"}},\"type\":\"object\"}",
+			ExpectBody:   `{"$comment":"this is a mark for our injected plugin schema","properties":{"cookie":{"default":"jwt","type":"string"},"disable":{"type":"boolean"},"header":{"default":"authorization","type":"string"},"query":{"default":"jwt","type":"string"}}`,
 			Sleep:        base.SleepTime,
 		}),
 		table.Entry("get schema of non-existent plugin", base.HttpTestCase{
@@ -70,7 +63,7 @@ var _ = ginkgo.Describe("Schema Test", func() {
 			Path:         "/apisix/admin/schemas/consumer",
 			Headers:      map[string]string{"Authorization": base.GetToken()},
 			ExpectStatus: http.StatusOK,
-			ExpectBody:   `"properties":{"create_time":{"type":"integer"},"desc":{"maxLength":256,"type":"string"},"labels":{"description":"key/value pairs to specify attributes","maxProperties":16,"patternProperties":{".*":{"description":"value of label","maxLength":64,"minLength":1,"pattern":"^\\S+$","type":"string"}},"type":"object"},"plugins":{"type":"object"},"update_time":{"type":"integer"},"username":{"maxLength":100,"minLength":1,"pattern":"^[a-zA-Z0-9_]+$","type":"string"}}`,
+			ExpectBody:   `"properties":{"create_time":{"type":"integer"},"desc":{"maxLength":256,"type":"string"},"labels":{"description":"key/value pairs to specify attributes","patternProperties":{".*":{"description":"value of label","maxLength":64,"minLength":1,"pattern":"^\\S+$","type":"string"}},"type":"object"},"plugins":{"type":"object"},"update_time":{"type":"integer"},"username":{"maxLength":100,"minLength":1,"pattern":"^[a-zA-Z0-9_]+$","type":"string"}}`,
 			Sleep:        base.SleepTime,
 		}),
 		table.Entry("get schema of non-existent resources", base.HttpTestCase{
